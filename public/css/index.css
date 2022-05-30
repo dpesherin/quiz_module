@@ -154,28 +154,19 @@ main{
 }
 .quiz-el>.controls{
     position: relative;
-    width: 20%;
+    width: 40%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .quiz-el>.controls>a{
     position: relative;
     color: black;
     text-decoration: none;
-    width: 45%;
+    width: 30%;
     text-align: center;
-    padding: 2% 0%;
+    padding: 2% 0% 2% 0%;
     border-radius: 10px;
     font-weight: 600;
-    box-shadow: 0 0 10px black;
-    height: 35px;
-}
-a.update{
-    background-color: rgb(154, 209, 4);
-}
-a.delete{
-    background-color: red;
-    color: white!important;
 }
 .message{
     font-size: 1.25rem;
@@ -279,4 +270,45 @@ form>.answer>h4{
     border-radius: 10px;
     color: black;
     text-align: center;
+}
+.complete{
+    padding: 5px 10px;
+    width: 100%!important;
+}
+.answer-el{
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.answer-el>h3{
+    margin: 2% 0%;
+}
+.answer-vars{
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.var{
+    padding: 1% 0%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-weight: 550;
+    text-align: center;
+    margin: 5%;
+    width: 22%;
+    cursor: pointer;
+}
+.answer-vars>textarea{
+    position: relative;
+    width: 80%;
+    margin: 1% 0%;
+    border: 1px solid gray;
 }

@@ -8,9 +8,9 @@ $( document ).ready(async function() {
         });        
     });
 
-    const url = '/api/quiz/get';
+    const url = '/api/quiz/get.for.complete';
     const user = JSON.parse(localStorage.getItem("userData"))
-    const data = { author: user.id};
+    const data = {targets : user.id};
 
     try {
         const response = await fetch(url, {
@@ -27,19 +27,18 @@ $( document ).ready(async function() {
                 `<div class="quiz-el" name=${el._id}>
                     <h3>${el.title}</h3>
                     <div class="controls" id=${el._id}>
-                        <a href="#" name=${el._id} class="start btn btn-primary">Запустить</a>
-                        <a href="#" name=${el._id} class="update btn btn-success">Изменить</a>
-                        <a href="#" name=${el._id} class="delete btn btn-danger">Удалить</a>
+                        <a href="#" name=${el._id} class="complete btn btn-primary">Приступить</a>
                     </div>
                 </div>`)
         });
     } catch (error) {
         console.error('Ошибка:', error);
     }
-    
-    $('.delete').click(async(event)=>{
-        const url = '/api/quiz/delete';
+
+    $('.complete').click(async(event)=>{
+        const url = '/api/question/getall';
         let id = event.target.name
+        localStorage.setItem('quizID', id)
         const data = {id: id};
 
         try {
@@ -51,16 +50,35 @@ $( document ).ready(async function() {
                 }
             });
             const json = await response.json();
-            if(json.message == 'Success'){
-                $(`#${id}`).remove()
-                $(`div[name=${id}]`).append('<div class="message">Удалено</div>')
-                setTimeout(function () {
-                    $(`div[name=${id}]`).remove()
-                }, 400);
-            }
+            $('h1').remove()
+            $('#quizzes').remove()
+
+            json.result.forEach(el => {
+                $('.content').append(
+                    `<div class="answer-el" name=${el._id}>
+                        <h3>${el.title}</h3>
+                        <div class="answer-vars" id=${el._id}>    
+                        </div>
+                    </div>`)
+                if(el.type == 'option'){
+                    el.options.forEach(v => {
+                        $('.answer-vars').append(
+                            `<div class="var" name=${el._id}>
+                            ${v}
+                            </div>`
+                        )
+                    })
+                }else{
+                    $('.answer-vars').append(`
+                        <textarea name="${el._id}" cols="30" rows="5" placeholder="Введите ответ"></textarea>
+                    `)
+                }
+            })
+
+
         } catch (error) {
             console.error('Ошибка:', error);
         }
     })
+    
 });
-

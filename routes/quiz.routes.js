@@ -29,6 +29,17 @@ router.post('/get', async (req,res) =>{
     }
 })
 
+router.post('/get.for.complete', async (req,res) =>{
+    const {targets} = req.body
+    try {
+        const quizzes = await Quiz.find({targets: targets})
+        return res.status(201).json({result: quizzes})
+        
+    } catch (e) {
+        return res.status(500).json({ message: `Server error ${e.message}`})
+    }
+})
+
 router.post('/delete', async (req,res) =>{
     const {id} = req.body
     try {
