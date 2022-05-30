@@ -222,6 +222,7 @@ async function deployAndAdd(){
             $('.input-group').remove()
             $('#multi').prop('checked', false);
             $('#type').val('text')
+            localStorage.setItem('opt', "text")
 
         }catch(error){
             console.error('Ошибка:', error);
