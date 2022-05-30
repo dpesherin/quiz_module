@@ -62,7 +62,7 @@ $( document ).ready(async function() {
                     </div>`)
                 if(el.type == 'option'){
                     el.options.forEach(v => {
-                        $('.answer-vars').append(
+                        $(`#${el._id}`).append(
                             `<div class="var" name=${el._id}>
                             ${v}
                             </div>`
