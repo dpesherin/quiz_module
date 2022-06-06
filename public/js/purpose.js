@@ -61,19 +61,37 @@ $( document ).ready(async function() {
                         </div>
                     </div>`)
                 if(el.type == 'option'){
-                    el.options.forEach(v => {
-                        $(`#${el._id}`).append(
-                            `<div class="var" name=${el._id}>
-                            ${v}
-                            </div>`
-                        )
-                    })
+                    if(el.multi == true){
+                        el.options.forEach(v => {
+                            $(`#${el._id}`).append(
+                                `<div class="var multi" name=${el._id} onclick='setActive(event, "${el._id}")'>
+                                ${v}
+                                </div>`
+                            )
+                        })
+                        $(`.answer-el[name=${el._id}]`).append(`<p>*Возможно несколько вариантов ответа</p>`)  
+                    }else{
+                        el.options.forEach(v => {
+                            $(`#${el._id}`).append(
+                                `<div class="var" name=${el._id} onclick='setActive(event, "${el._id}")'>
+                                ${v}
+                                </div>`
+                            )
+                        })
+                    }
                 }else{
-                    $('.answer-vars').append(`
-                        <textarea name="${el._id}" cols="30" rows="5" placeholder="Введите ответ"></textarea>
+                    $(`#${el._id}`).append(`
+                        <textarea class="form-control" name="${el._id}" cols="30" rows="5" placeholder="Введите ответ"></textarea>
                     `)
                 }
             })
+
+            $('.content').append(
+                
+                `<div class="container d-flex center">
+                    <button class="btn btn-primary">Отправить ответы</button>
+                </div>`
+            )
 
 
         } catch (error) {
@@ -82,3 +100,12 @@ $( document ).ready(async function() {
     })
     
 });
+
+function setActive(event, id){
+    if(event.target.classList.contains('multi')){
+        event.target.classList.toggle('selected')
+    }else{
+        $(`.var[name=${id}]`).removeClass('selected')
+        event.target.classList.add('selected')
+    }
+}

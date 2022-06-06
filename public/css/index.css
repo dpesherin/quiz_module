@@ -298,18 +298,31 @@ form>.answer>h4{
     flex-wrap: wrap;
 }
 .var{
+    position: relative;
     padding: 1% 0%;
     border-radius: 10px;
     border: 1px solid gray;
     font-weight: 550;
     text-align: center;
-    margin: 5%;
-    width: 22%;
+    margin: 3% 0%;
+    width: 40%;
     cursor: pointer;
 }
 .answer-vars>textarea{
     position: relative;
     width: 80%;
-    margin: 1% 0%;
+    margin: 3% 0%;
     border: 1px solid gray;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    min-height: 80px;
+}
+.selected{
+    background-color: lime;
+    box-shadow: 0 0 7px black;
 }
